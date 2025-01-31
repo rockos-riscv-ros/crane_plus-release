@@ -1,0 +1,60 @@
+ros-jazzy-crane-plus-examples (3.0.0-1noble) noble; urgency=high
+
+  * Mock components対応 (#86 <https://github.com/rt-net/crane_plus/issues/86>)
+  * Jazzy対応 (#78 <https://github.com/rt-net/crane_plus/issues/78>)
+  * Gazebo環境にカメラを追加 (#83 <https://github.com/rt-net/crane_plus/issues/83>)
+  * READMEにカメラサンプルデモのGIFを追加 (#70 <https://github.com/rt-net/crane_plus/issues/70>)
+  * Contributors: Kuwamai, YusukeKato, mizonon
+
+ -- RT Corporation <shop@rt-net.jp>  Thu, 30 Jan 2025 15:00:00 -0000
+
+ros-jazzy-crane-plus-examples (2.0.1-1noble) noble; urgency=high
+
+  * READMEにカメラサンプルデモのGIFを追加 (#70 <https://github.com/rt-net/crane_plus/issues/70>)
+  * Contributors: YusukeKato
+
+ -- RT Corporation <shop@rt-net.jp>  Thu, 07 Sep 2023 15:00:00 -0000
+
+ros-jazzy-crane-plus-examples (2.0.0-1noble) noble; urgency=high
+
+  * 軌道生成の失敗時にpick_and_placeを中断する機能を追加 (#65 <https://github.com/rt-net/crane_plus/issues/65>)
+  * カメラサンプルのHumble対応 (#64 <https://github.com/rt-net/crane_plus/issues/64>)
+  * Feature/support humble (#58 <https://github.com/rt-net/crane_plus/issues/58>)
+  * Contributors: Shota Aoki, YusukeKato
+
+ -- RT Corporation <shop@rt-net.jp>  Mon, 31 Jul 2023 15:00:00 -0000
+
+ros-jazzy-crane-plus-examples (1.1.0-1noble) noble; urgency=high
+
+  * Update author tags (#49 <https://github.com/rt-net/crane_plus/issues/49>)
+  * Rename CRANE+V2 to CRANE+ V2 (#44 <https://github.com/rt-net/crane_plus/issues/44>)
+  * Contributors: Shota Aoki
+
+ -- RT Corporation <shop@rt-net.jp>  Mon, 15 Aug 2022 15:00:00 -0000
+
+ros-jazzy-crane-plus-examples (1.0.0-1noble) noble; urgency=high
+
+  * パッケージバージョン表記の更新 (#40 <https://github.com/rt-net/crane_plus/issues/40>)
+  * crane_plus_ignition パッケージを追加し、Gazeboの使用を非推奨にする (#38 <https://github.com/rt-net/crane_plus/issues/38>)
+  * xacroファイルの読み込みを一元化するためのPythonスクリプトを追加 (#36 <https://github.com/rt-net/crane_plus/issues/36>)
+  * GripperActionControllerに関するコメントを削除 (#37 <https://github.com/rt-net/crane_plus/issues/37>)
+  * hardware_interfaceのパラメータをxacro引数から変更する (#35 <https://github.com/rt-net/crane_plus/issues/35>)
+  * Update crane_plus_gazebo (#30 <https://github.com/rt-net/crane_plus/issues/30>)
+  * Contributors: Atsushi Kuwagata, Shota Aoki
+
+ -- RT Corporation <shop@rt-net.jp>  Tue, 21 Jun 2022 15:00:00 -0000
+
+ros-jazzy-crane-plus-examples (0.1.0-1noble) noble; urgency=high
+
+  * Fix READMEs (#25 <https://github.com/rt-net/crane_plus/issues/25>)
+  * Update maintainer and author in package.xml (#23 <https://github.com/rt-net/crane_plus/issues/23>)
+  * Update for release (#21 <https://github.com/rt-net/crane_plus/issues/21>)
+  * Update crane_plus_examples (#18 <https://github.com/rt-net/crane_plus/issues/18>)
+  * Add joint_values example and pick_and_place example (#15 <https://github.com/rt-net/crane_plus/issues/15>)
+  * Add pose_groupstate example. (#14 <https://github.com/rt-net/crane_plus/issues/14>)
+  * Add crane_plus_examples (#13 <https://github.com/rt-net/crane_plus/issues/13>)
+  * Contributors: Shota Aoki
+
+ -- RT Corporation <shop@rt-net.jp>  Tue, 10 Nov 2020 15:00:00 -0000
+
+
