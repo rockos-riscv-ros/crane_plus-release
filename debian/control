@@ -1,0 +1,12 @@
+Source: ros-jazzy-crane-plus-gazebo
+Section: misc
+Priority: optional
+Maintainer: RT Corporation <shop@rt-net.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake, ros-jazzy-ament-lint-auto <!nocheck>, ros-jazzy-ament-lint-common <!nocheck>, ros-jazzy-controller-manager, ros-jazzy-crane-plus-description, ros-jazzy-crane-plus-moveit-config, ros-jazzy-gripper-controllers, ros-jazzy-robot-state-publisher, ros-jazzy-ros-gz, ros-jazzy-ros2-controllers, ros-jazzy-ros-workspace
+Homepage: 
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-crane-plus-gazebo
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-controller-manager, ros-jazzy-crane-plus-description, ros-jazzy-crane-plus-moveit-config, ros-jazzy-gripper-controllers, ros-jazzy-robot-state-publisher, ros-jazzy-ros-gz, ros-jazzy-ros2-controllers, ros-jazzy-ros-workspace
+Description: CRANE+ V2 gazebo simulation package
