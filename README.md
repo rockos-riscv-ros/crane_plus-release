@@ -1,120 +1,265 @@
-# crane_plus
+# crane_plus_examples
 
-[![industrial_ci](https://github.com/rt-net/crane_plus/workflows/industrial_ci/badge.svg?branch=master)](https://github.com/rt-net/crane_plus/actions?query=workflow%3Aindustrial_ci+branch%3Amaster)
+このパッケージはCRANE+ V2 ROS 2パッケージのサンプルコード集です。
 
-ROS 2 package suite of CRANE+ V2.
+## 準備（実機を使う場合）
 
-<img src=https://www.rt-shop.jp/images/RT/CRANEplusV2.png width=400px/><img src=https://rt-net.github.io/images/crane-plus/pick_and_place.gif width=400px />
+![crane_plus](https://rt-net.github.io/images/crane-plus/CRANEV2-500x500.png)
 
-## Table of Contents
+### 1. CRANE+ V2本体をPCに接続する
 
-- [Supported ROS 2 distributions](#supported-ROS-2-distributions)
-- [Requirements](#requirements)
-- [Installation](#installation)
-  - [Binary installation](#binary-installation)
-  - [Source Build](#source-build)
-- [Quick Start](#quick-start)
-- [Packages](#packages)
-- [License](#license)
-- [Disclaimer](#disclaimer)
+CRANE+ V2本体をPCに接続します。
+接続方法は製品マニュアルを参照してください。
 
-## Supported ROS 2 distributions
+**※CRANE+ V2本体が接触しないように、十分なスペースを確保してください。**
 
-- [Foxy](https://github.com/rt-net/crane_plus/tree/foxy-devel)
-- [Humble](https://github.com/rt-net/crane_plus/tree/humble-devel)
-- Jazzy
-## Requirements
+### 2. USB通信ポートの接続を確認する
 
-- CRANE+ V2
-  - [Product Introduction](https://rt-net.jp/products/cranev2/)
-  - [Web Shop](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_1&products_id=3626&language=ja)
-- Linux OS
-  - Ubuntu 24.04
-- ROS
-  - [Jazzy Jalisco](https://docs.ros.org/en/jazzy/Installation.html)
+USB通信ポートの設定については`crane_plus_control`の
+[README](../crane_plus_control/README.md)
+を参照してください。
 
-## Installation
+**正しく設定できていない場合、CRANE+ V2が動作しない、振動する、などの不安定な動きになるので注意してください**
 
-### Docker images
+### 3. move_groupとcontrollerを起動する
 
-ビルド済みのパッケージ含むDocker imageを用意してます。
-詳細は[.docker/README.md](./.docker/README.md)を参照してください。
+#### 標準のCRANE+ V2を使用する場合
 
-### Binary installation
+次のコマンドでmove_group (`crane_plus_moveit_config`)と
+controller (`crane_plus_control`)を起動します。
 
 ```sh
-$ sudo apt update 
-$ sudo apt install ros-$ROS_DISTRO-crane-plus
-```
-
-### Source Build
-
-```sh
-# Download crane_plus repository
-$ mkdir -p ~/ros2_ws/src
-$ cd ~/ros2_ws/src
-$ git clone -b $ROS_DISTRO https://github.com/rt-net/crane_plus.git
-
-# Install dependencies
-$ rosdep install -r -y -i --from-paths .
-
-# Build & Install
-$ cd ~/ros2_ws
-$ colcon build --symlink-install
-$ source ~/ros2_ws/install/setup.bash
-```
-
-## Quick Start
-
-```sh
-# Connect CRANE+ V2 to PC, then
-$ source ~/ros2_ws/install/setup.bash
 $ ros2 launch crane_plus_examples demo.launch.py port_name:=/dev/ttyUSB0
+```
 
-# Terminal 2
-$ source ~/ros2_ws/install/setup.bash
+#### Webカメラ搭載モデルを使用する場合
+
+Webカメラ搭載モデルの場合は、次のコマンドを実行してください。
+```video_device```は使用するWebカメラを指定してください。
+
+```sh
+$ ros2 launch crane_plus_examples demo.launch.py port_name:=/dev/ttyUSB0 use_camera:=true video_device:=/dev/video0
+```
+
+## 準備（Gazeboを使う場合）
+=======
+![crane_plus_ignition](https://rt-net.github.io/images/crane-plus/crane_plus_ignition.png)
+
+### 1. move_groupとGazeboを起動する
+
+次のコマンドでmove_group (`crane_plus_moveit_config`)とGazeboを起動します。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_table.launch.py
+```
+
+#### Webカメラ搭載モデルを使用する場合
+
+Webカメラ搭載モデルの場合は、次のコマンドを実行してください。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_table.launch.py use_camera:=true
+```
+
+CRANE+ V2の前にArUcoマーカ付きのBoxを置いたシミュレータ環境を使用する場合は次のコマンドを実行します。
+[aruco\_detection](#aruco_detection)サンプルを実行する際に使用することを想定しています。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_aruco_cube.launch.py use_camera:=true
+```
+
+CRANE+ V2の前に赤いBoxを置いたシミュレータ環境を使用する場合は次のコマンドを実行します。
+[color\_detection](#color_detection)サンプルを実行する際に使用すること想定しています。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_red_cube.launch.py use_camera:=true
+```
+
+## 準備（Mock Componentsを使う場合）
+
+### 1. move_groupとcontrollerを起動する
+
+次のコマンドでmove_group (`crane_plus_moveit_config`)と
+controller (`crane_plus_control`)を起動します。
+
+```sh
+$ ros2 launch crane_plus_examples demo.launch.py use_mock_components:=true
+```
+
+Mock Componentsではカメラを使ったサンプルを実行することはできません。
+
+## サンプルプログラムを実行する
+
+準備ができたらサンプルプログラムを実行します。
+例えばグリッパを開閉するサンプルは次のコマンドで実行できます。
+
+```sh
 $ ros2 launch crane_plus_examples example.launch.py example:='gripper_control'
+```
 
-# Press [Ctrl-c] to terminate.
+終了するときは`Ctrl+c`を入力します。
+
+## Gazeboでサンプルプログラムを実行する場合
+
+Gazeboでサンプルプログラムを実行する場合は`use_sim_time`オプションを付けます。
+
+```sh
+$ ros2 launch crane_plus_examples example.launch.py example:='gripper_control' use_sim_time:=true
+```
+
+## Examples
+
+`demo.launch.py`を実行している状態で各サンプルを実行できます。
+
+- [gripper_control](#gripper_control)
+- [pose_groupstate](#pose_groupstate)
+- [joint_values](#joint_values)
+- [pick_and_place](#pick_and_place)
+
+実行できるサンプルの一覧は、`examples.launch.py`にオプション`-s`を付けて実行することで表示できます。
+
+```sh
+$ ros2 launch crane_plus_examples example.launch.py -s
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'example':
+        Set an example executable name: [gripper_control, pose_groupstate, joint_values, pick_and_place]
+        (default: 'gripper_control')
+```
+
+---
+
+### gripper_control
+
+グリッパを開閉させるコード例です。
+
+次のコマンドを実行します。
+
+```sh
+$ ros2 launch crane_plus_examples example.launch.py example:='gripper_control'
 ```
 
 <img src=https://rt-net.github.io/images/crane-plus/gripper_control.gif width=500px />
 
-詳細は[crane_plus_examples](./crane_plus_examples/README.md)
-を参照してください。
+[back to example list](#examples)
 
-## Packages
+---
 
-- crane_plus_control
-  - [README](./crane_plus_control/README.md)
-  - CRANE+ V2を制御するパッケージです
-  - USB通信ポートの設定方法をREAMDEに記載してます
-- crane_plus_description
-  - [README](./crane_plus_description/README.md)
-  - CRANE+ V2のモデルデータ（xacro）を定義するパッケージです
-- crane_plus_examples
-  - [README](./crane_plus_examples/README.md)
-  - CRANE+ V2のサンプルコード集です
-- crane_plus_gazebo
-  - [README](./crane_plus_gazebo/README.md)
-  - CRANE+ V2のGazeboシミュレーションパッケージです
-- crane_plus_moveit_config
-  - [README](./crane_plus_moveit_config/README.md)
-  - CRANE+ V2の`moveit2`設定ファイルです
+### pose_groupstate
 
-## License
+group_stateを使うコード例です。
 
-このリポジトリはApache 2.0ライセンスの元、公開されています。 
-ライセンスについては[LICENSE](./LICENSE)を参照ください。
+SRDFファイル[crane_plus_moveit_config/config/crane_plus.srdf](../crane_plus_moveit_config/config/crane_plus.srdf)
+に記載されている`home`と`vertical`の姿勢に移行します。
 
-サーボモータのAX-12Aに関するCADモデルの使用については、ROBOTIS社より使用許諾を受けています。 
-CRANE+ V2に使用されているROBOTIS社の部品類にかかる著作権、商標権、その他の知的財産権は、ROBOTIS社に帰属します。
+次のコマンドを実行します。
 
-We have obtained permission from ROBOTIS Co., Ltd. to use CAD models relating to servo motors AX-12A. The proprietary rights relating to any components or parts manufactured by ROBOTIS and used in this product, including but not limited to copyrights, trademarks, and other intellectual property rights, shall remain vested in ROBOTIS.
+```sh
+$ ros2 launch crane_plus_examples example.launch.py example:='pose_groupstate'
+```
 
-## Disclaimer
+<img src=https://rt-net.github.io/images/crane-plus/pose_groupstate.gif width=500px />
 
-本ソフトウェアはApache 2.0ライセンスで、「AS IS」（現状有姿のまま）で提供しています。本ソフトウェアに関する無償サポートはありません。
+[back to example list](#examples)
 
-当該製品および当ソフトウェアの使用中に生じたいかなる損害も株式会社アールティでは一切の責任を負いかねます。 ユーザー自身で作成されたプログラムに適切な制限動作が備わっていない場合、本体の損傷や、本体が周囲や作業者に接触、あるいは衝突し、思わぬ重大事故が発生する危険があります。 ユーザーの責任において十分に安全に注意した上でご使用下さい。
+---
 
+### joint_values 
+
+アームのジョイント角度を１つずつ変更するコード例です。
+
+次のコマンドを実行します。
+
+```sh
+$ ros2 launch crane_plus_examples example.launch.py example:='joint_values'
+```
+
+<img src=https://rt-net.github.io/images/crane-plus/joint_values.gif width=500px />
+
+[back to example list](#examples)
+
+---
+
+### pick_and_place
+
+モノを掴む・持ち上げる・運ぶ・置くコード例です。
+
+次のコマンドを実行します。
+
+```sh
+$ ros2 launch crane_plus_examples example.launch.py example:='pick_and_place'
+```
+
+<img src=https://rt-net.github.io/images/crane-plus/pick_and_place.gif width=500px />
+
+[back to example list](#examples)
+
+---
+
+## Camera Examples
+
+Webカメラ搭載モデルのカメラを使用したサンプルコードです。
+
+[「Webカメラ搭載モデルを使用する場合」](#Webカメラ搭載モデルを使用する場合)の手順に従って、
+`demo.launch`を実行している状態で、
+各サンプルを実行できます。
+
+- [aruco\_detection](#aruco_detection)
+- [color\_detection](#color_detection)
+
+実行できるサンプルの一覧は、`camera_example.launch.py`にオプション`-s`を付けて実行することで確認できます。
+
+```sh
+$ ros2 launch crane_plus_examples camera_example.launch.py -s
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'example':
+        Set an example executable name: [color_detection]
+        (default: 'color_detection')
+```
+
+---
+
+### aruco_detection
+
+モノに取り付けたArUcoマーカをカメラで検出し、マーカ位置に合わせて掴むコード例です。
+マーカは[aruco_markers.pdf](./aruco_markers.pdf)をA4紙に印刷して、一辺50mmの立方体に取り付けて使用します。
+
+検出されたマーカの位置姿勢はtfのフレームとして配信されます。
+tfの`frame_id`はマーカIDごとに異なりID0のマーカの`frame_id`は`target_0`になります。
+掴む対象は`target_0`に設定されています。
+マーカ検出には[OpenCV](https://docs.opencv.org/4.x/d5/dae/tutorial_aruco_detection.html)を使用しています。
+
+次のコマンドを実行します。
+
+```bash
+ros2 launch crane_plus_examples camera_example.launch.py example:='aruco_detection'
+```
+
+#### Videos
+[![crane_plus_aruco_detection_demo](https://rt-net.github.io/images/crane-plus/aruco_detection.gif)](https://youtu.be/m9dus6LCocc)
+
+[back to example list](#examples)
+
+---
+
+### color_detection
+
+特定の色の物体を検出して掴むコード例です。
+
+デフォルトでは赤い物体の位置をtfのフレームとして配信します。
+tfの`frame_id`は`target_0`です。
+色検出には[OpenCV](https://docs.opencv.org/4.x/db/d8e/tutorial_threshold.html)を使用しています。
+
+次のコマンドを実行します。
+
+```sh
+ros2 launch crane_plus_examples camera_example.launch.py example:='color_detection'
+```
+
+#### Videos
+[![crane_plus_color_detection_demo](https://rt-net.github.io/images/crane-plus/color_detection.gif)](https://youtu.be/Kn0eWA7sALY)
+
+[back to example list](#examples)
+
+---
