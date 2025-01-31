@@ -1,0 +1,44 @@
+ros-jazzy-crane-plus (3.0.0-1noble) noble; urgency=high
+
+
+
+ -- RT Corporation <shop@rt-net.jp>  Thu, 30 Jan 2025 15:00:00 -0000
+
+ros-jazzy-crane-plus (2.0.1-1noble) noble; urgency=high
+
+
+
+ -- RT Corporation <shop@rt-net.jp>  Thu, 07 Sep 2023 15:00:00 -0000
+
+ros-jazzy-crane-plus (2.0.0-1noble) noble; urgency=high
+
+  * Feature/support humble (#58 <https://github.com/rt-net/crane_plus/issues/58>)
+  * Contributors: Shota Aoki, YusukeKato
+
+ -- RT Corporation <shop@rt-net.jp>  Mon, 31 Jul 2023 15:00:00 -0000
+
+ros-jazzy-crane-plus (1.1.0-1noble) noble; urgency=high
+
+  * Update author tags (#49 <https://github.com/rt-net/crane_plus/issues/49>)
+  * Add crane_plus_ignition dependency (#48 <https://github.com/rt-net/crane_plus/issues/48>)
+  * Rename CRANE+V2 to CRANE+ V2 (#44 <https://github.com/rt-net/crane_plus/issues/44>)
+  * Contributors: Shota Aoki
+
+ -- RT Corporation <shop@rt-net.jp>  Mon, 15 Aug 2022 15:00:00 -0000
+
+ros-jazzy-crane-plus (1.0.0-1noble) noble; urgency=high
+
+  * パッケージバージョン表記の更新 (#40 <https://github.com/rt-net/crane_plus/issues/40>)
+  * Contributors: Atsushi Kuwagata
+
+ -- RT Corporation <shop@rt-net.jp>  Tue, 21 Jun 2022 15:00:00 -0000
+
+ros-jazzy-crane-plus (0.1.0-1noble) noble; urgency=high
+
+  * Update maintainer and author in package.xml (#23 <https://github.com/rt-net/crane_plus/issues/23>)
+  * Update for release (#21 <https://github.com/rt-net/crane_plus/issues/21>)
+  * Contributors: Shota Aoki
+
+ -- RT Corporation <shop@rt-net.jp>  Tue, 10 Nov 2020 15:00:00 -0000
+
+
