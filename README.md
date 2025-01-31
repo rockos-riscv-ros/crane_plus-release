@@ -21,17 +21,17 @@ ROS 2 package suite of CRANE+ V2.
 ## Supported ROS 2 distributions
 
 - [Foxy](https://github.com/rt-net/crane_plus/tree/foxy-devel)
-- Humble
-
+- [Humble](https://github.com/rt-net/crane_plus/tree/humble-devel)
+- Jazzy
 ## Requirements
 
 - CRANE+ V2
   - [Product Introduction](https://rt-net.jp/products/cranev2/)
   - [Web Shop](https://www.rt-shop.jp/index.php?main_page=product_info&cPath=1348_1&products_id=3626&language=ja)
 - Linux OS
-  - Ubuntu 22.04
+  - Ubuntu 24.04
 - ROS
-  - [Humble Hawksbill](https://docs.ros.org/en/humble/Installation.html)
+  - [Jazzy Jalisco](https://docs.ros.org/en/jazzy/Installation.html)
 
 ## Installation
 
@@ -43,19 +43,17 @@ ROS 2 package suite of CRANE+ V2.
 ### Binary installation
 
 ```sh
-TBD
+$ sudo apt update 
+$ sudo apt install ros-$ROS_DISTRO-crane-plus
 ```
 
 ### Source Build
 
 ```sh
-# Setup ROS environment
-$ source /opt/ros/humble/setup.bash
-
 # Download crane_plus repository
 $ mkdir -p ~/ros2_ws/src
 $ cd ~/ros2_ws/src
-$ git clone https://github.com/rt-net/crane_plus.git
+$ git clone -b $ROS_DISTRO https://github.com/rt-net/crane_plus.git
 
 # Install dependencies
 $ rosdep install -r -y -i --from-paths .

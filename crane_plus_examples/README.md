@@ -53,6 +53,41 @@ $ ros2 launch crane_plus_examples demo.launch.py port_name:=/dev/ttyUSB0 use_cam
 $ ros2 launch crane_plus_gazebo crane_plus_with_table.launch.py
 ```
 
+#### Webカメラ搭載モデルを使用する場合
+
+Webカメラ搭載モデルの場合は、次のコマンドを実行してください。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_table.launch.py use_camera:=true
+```
+
+CRANE+ V2の前にArUcoマーカ付きのBoxを置いたシミュレータ環境を使用する場合は次のコマンドを実行します。
+[aruco\_detection](#aruco_detection)サンプルを実行する際に使用することを想定しています。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_aruco_cube.launch.py use_camera:=true
+```
+
+CRANE+ V2の前に赤いBoxを置いたシミュレータ環境を使用する場合は次のコマンドを実行します。
+[color\_detection](#color_detection)サンプルを実行する際に使用すること想定しています。
+
+```sh
+$ ros2 launch crane_plus_gazebo crane_plus_with_red_cube.launch.py use_camera:=true
+```
+
+## 準備（Mock Componentsを使う場合）
+
+### 1. move_groupとcontrollerを起動する
+
+次のコマンドでmove_group (`crane_plus_moveit_config`)と
+controller (`crane_plus_control`)を起動します。
+
+```sh
+$ ros2 launch crane_plus_examples demo.launch.py use_mock_components:=true
+```
+
+Mock Componentsではカメラを使ったサンプルを実行することはできません。
+
 ## サンプルプログラムを実行する
 
 準備ができたらサンプルプログラムを実行します。
