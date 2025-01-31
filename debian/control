@@ -1,0 +1,12 @@
+Source: ros-jazzy-crane-plus
+Section: misc
+Priority: optional
+Maintainer: RT Corporation <shop@rt-net.jp>
+Build-Depends: debhelper (>= 9.0.0), ros-jazzy-ament-cmake, ros-jazzy-ros-workspace
+Homepage: https://rt-net.jp/products/cranev2/
+Standards-Version: 3.9.2
+
+Package: ros-jazzy-crane-plus
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ros-jazzy-crane-plus-control, ros-jazzy-crane-plus-description, ros-jazzy-crane-plus-examples, ros-jazzy-crane-plus-gazebo, ros-jazzy-crane-plus-moveit-config, ros-jazzy-ros-workspace
+Description: ROS 2 package suite of CRANE+ V2
